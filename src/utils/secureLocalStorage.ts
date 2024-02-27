@@ -9,3 +9,12 @@ export const encryptedLocalStorage = new EncryptStorage(
   }
 );
 
+const decode = (value:any) => {
+  return JSON.stringify(value)
+}
+
+export const useSecureLocalStorage = (key:any, defaultState:any) => {
+  console.log('useSecureLocalStorage', key, decode(defaultState))
+  encryptedLocalStorage.setItem(key, decode(defaultState))
+}
+

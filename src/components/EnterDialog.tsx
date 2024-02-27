@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input"
 import { AuthContext, useStore } from "@/AuthProvider"
 import { observer } from "mobx-react"
 import { login } from "@/server/UserApi"
-import { useSecureLocalStorage } from "@/hooks/useLocalStorage"
+import { useSecureLocalStorage } from "@/utils/secureLocalStorage"
 
 export const EnterDialog = observer(()=> {
 
