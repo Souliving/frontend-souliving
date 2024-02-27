@@ -15,13 +15,14 @@ import { Input } from "@/components/ui/input"
 import { AuthContext, useStore } from "@/AuthProvider"
 import { observer } from "mobx-react"
 import { login } from "@/server/UserApi"
+import { useSecureLocalStorage } from "@/hooks/useLocalStorage"
 
 export const EnterDialog = observer(()=> {
 
   const { user }= useStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
- 
+
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -35,7 +36,19 @@ export const EnterDialog = observer(()=> {
        console.log(data);
       user.setIsAuth(true);
       user.setUser({ id: data.userId, email: 'email', name: 'name', surname: 'surname' });
-      console.log(user);
+      useSecureLocalStorage('userData', data);
+     /*  for (let key in data) {
+        if (data.hasOwnProperty(key) && key !== 'jwt') {
+          useSecureLocalStorage(key, data[key]);
+        }
+        else if(data.hasOwnProperty(key)){
+          useSecureLocalStorage('token', data[key].token)
+          
+          //useSecureLocalStorage(key, data[key]);
+        } 
+      } */
+     
+   
      });
       
       

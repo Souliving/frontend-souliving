@@ -37,3 +37,9 @@ export default class UserStore {
     } */
 }
 
+export const emptyUser: User = {
+    id: -1,
+    email: '',
+    name: '',
+    surname: '',
+  };

@@ -22,7 +22,7 @@ export const login = async (email:string, password:string) => {
 }
 export const registration = async (email:string,  
                                   password:string) => {
-  const postData={email:email,name:'Ангелина', password:password};
+  const postData={email:email, password:password};
   const config = {
       headers: {
         'Content-Type': 'application/json'

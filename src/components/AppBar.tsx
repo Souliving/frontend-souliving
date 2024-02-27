@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { AuthContext, useStore } from "@/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { User } from "@/utils/dataStructure";
+import { emptyUser } from "@/store/UserStore";
+import { encryptedLocalStorage } from "@/utils/secureLocalStorage";
 
 
 function AppBar () {
@@ -18,13 +20,8 @@ function AppBar () {
   }
   const logOut =()=>{
     user.setIsAuth(false);
-    const emptyUser: User = {
-      id: -1,
-      email: '',
-      name: '',
-      surname: '',
-    };
-    user.setUser(emptyUser)
+    user.setUser(emptyUser);
+    encryptedLocalStorage.removeItem('userData');
   }
   
 
