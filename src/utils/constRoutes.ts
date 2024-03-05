@@ -9,4 +9,5 @@ export const ALL_ADS_ROUTE = '/' */
 /* export const HOME_AUTH_USER = '/home' */
 export const MAIN_ROUTE = '/'
 export const REGISTRATION_ROUTE = '/registration'
+export const AD_ROUTE = '/ad'
 

@@ -21,8 +21,6 @@ export const AuthProvider = (props: { children: string | number | boolean | Reac
         setAuth(false)
     } */
 
-    
-
     return (
         <AuthContext.Provider value={new GlobalStore()}>
             {props.children}

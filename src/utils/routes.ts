@@ -1,19 +1,22 @@
 
 import RegistrationPage from '@/pages/registration-page/RegistrationPage'
-import {
-    MAIN_ROUTE, REGISTRATION_ROUTE} from './constRoutes'
 import MainPage from '@/pages/MainPage'
+import OneAdPage from '@/pages/one-ad-page/OneAdPage'
+import {
+    AD_ROUTE,
+    MAIN_ROUTE, 
+    REGISTRATION_ROUTE} from './constRoutes'
+
+
 
 
 
 //массив доступных страниц авторизованному пользователю
-export const authRoutes=[
-{
-    /* path:HOME_AUTH_USER,
-    Component:UserHomePage */
-},
-
-
+export const authRoutes =[
+    {
+        path: AD_ROUTE +'/:id',
+        Component: OneAdPage
+    }
 ]
 //массив доступных страниц неавторизованному пользователю
 export const publicRoutes=[
@@ -38,5 +41,6 @@ export const publicRoutes=[
     Component:OneAd
 }  */
 ]
+
  
 
