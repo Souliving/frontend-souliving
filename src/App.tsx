@@ -10,13 +10,14 @@ import { AuthProvider } from './AuthProvider';
 
 
 function App() {
-  
+
 
   return (
-    <AuthProvider>
-      <AppRouter />
-    </AuthProvider>
-    
+    <div className="App">
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
+    </div>
   )
 }
 

@@ -15,23 +15,9 @@ const MainPage = observer(() => {
    let auth;
    const [cities, setCities] = useState<any>(undefined);
    const [subways, setSubways] = useState<any>(undefined);
-    const { user }= useStore();
-    useEffect(() => {
-        // Получение данных из localStorage
-        const storedUserData = encryptedLocalStorage.getItem('userData');
-        // Проверка наличия данных
-        if (storedUserData) {
-          const userData = storedUserData;
-            console.log('userData', userData)
-            user.setIsAuth(true)
-            user.setUser({ id: userData.jwt.userId, 
-                email: userData.email, 
-                name: userData.name, 
-                surname: 'surname' });
-          // Ваши действия с авторизованным пользователем, например, установка состояния
-          // и перенаправление на защищенную страницу.
-        }
-      }, []);
+   const { user }= useStore();
+   
+   console.log("main "+user)
 
      /*  useEffect(()=>{
         console.log(user.isAuth)
