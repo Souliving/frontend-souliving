@@ -7,7 +7,7 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
 
-  const [userState, setUserState] = useState(() => {
+  const [userState] = useState(() => {
     // Получение данных из localStorage
     const storedUserData = encryptedLocalStorage.getItem('userData');
     console.log("auth")
