@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
         id: userData.jwt.userId,
         email: userData.email,
         name: userData.name,
-        surname: 'surname'
       });
       console.log(obj)
       return obj

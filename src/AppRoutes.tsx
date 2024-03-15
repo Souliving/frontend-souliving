@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, BrowserRouter as Router } from 'react-router-dom';
+import { Routes, Route, Navigate} from 'react-router-dom';
 import { MAIN_ROUTE } from './utils/constRoutes';
 import { AuthContext, AuthProvider, useStore } from './AuthProvider'
 import { useContext } from 'react';
@@ -12,7 +12,6 @@ function AppRouter() {
 
   return (
 
-    <Router>
         <Routes>
        
         { isAuth && 
@@ -27,7 +26,7 @@ function AppRouter() {
         <Route path="*" element={<Navigate to={MAIN_ROUTE} />} />
         
         </Routes>
-    </Router>
+   
     
   );
 }

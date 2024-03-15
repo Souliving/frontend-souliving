@@ -10,8 +10,7 @@ export default class UserStore {
         this._user = {
             id: -1,
             email: '',
-            name: '',
-            surname: ''
+            name: ''
         }
        /*  this._account = {} */
         makeAutoObservable(this)
@@ -41,5 +40,5 @@ export const emptyUser: User = {
     id: -1,
     email: '',
     name: '',
-    surname: '',
+   
   };

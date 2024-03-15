@@ -30,14 +30,15 @@ const UserHomePage=(() => {
     }
   }, []);
 
-  const navigateToFullForm = ((cardId:number, e: { preventDefault: () => void })=>{
+  const navigateToFullForm = (( shortAd: AdShortForm, e: { preventDefault: () => void })=>{
     e.preventDefault();
     if(user._isAuth){
       console.log('kkkkkkkkkkkk')
-    }
+    } 
+    const cardId = shortAd.id;
     console.log('переход к форме с id', cardId)
-
-    navigate('/ad/:'+cardId);
+   
+    navigate(`/ad/${cardId}`, { state: { shortAd } });
   })
 
     return (
@@ -62,7 +63,7 @@ const UserHomePage=(() => {
           <CardFooter>    
             <Button
               style={{ width:'90%'}}
-              onClick={(event) => navigateToFullForm(adShortForm.id, event)}
+              onClick={(event) => navigateToFullForm(adShortForm, event)}
             >Узнать больше</Button>
           </CardFooter>
         </Card>

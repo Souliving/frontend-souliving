@@ -12,10 +12,10 @@ export const userRegistrationShema_2 = z.object({
     username: z.string().min(2, {
         message: "Username must be at least 2 characters.",
     }),
-    surname:z.string(),
+   
     
-    date:z.string().datetime({ offset: true }),
-    country:z.string(),
+    birthDate:z.date(),
+    gender:z.string(),
     phone:z.string()
 
 })

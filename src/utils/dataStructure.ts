@@ -2,7 +2,18 @@ export interface User {
     id: number,
     email: string,
     name: string,
-    surname: string
+
+}
+
+export interface AdForm{
+  id: number,
+  userId: number,
+  shortFormId: number,
+  description: string,
+  homeType: HomeType,
+  socialMediaIds: [],
+  rating: number,
+  reviews: []
 }
 
 export interface AdShortForm {
@@ -43,4 +54,9 @@ export interface AdShortForm {
     id: number,
     name: string,
     cityId: number
+  }
+
+  export interface HomeType{
+    id: number,
+    name: string
   }

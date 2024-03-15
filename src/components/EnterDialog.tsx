@@ -35,7 +35,7 @@ export const EnterDialog = observer(()=> {
      await login(email, password).then((data)=>{
        console.log(data);
       user.setIsAuth(true);
-      user.setUser({ id: data.userId, email: 'email', name: 'name', surname: 'surname' });
+      user.setUser({ id: data.userId, email: 'email', name: 'name'});
       useSecureLocalStorage('userData', data);
      /*  for (let key in data) {
         if (data.hasOwnProperty(key) && key !== 'jwt') {

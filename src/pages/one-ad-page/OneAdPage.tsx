@@ -1,12 +1,46 @@
 import { useStore } from "@/AuthProvider"
+import { getFormByShortId, getFormByUserId } from "@/server/FormsApi"
+import { AdForm } from "@/utils/dataStructure"
+import { useEffect, useState } from "react"
+import { useLocation, useParams } from "react-router-dom"
+
 
 const OneAdPage=(() => {
-   
   const {user} = useStore()
-  console.log('OneAdPage', user._isAuth)
+  console.log('OneAdPage', user._isAuth);
+
+  const { id } = useParams();
+  const shortFormId = parseInt(id, 10);
+
+  const [ad, setAd] =useState<AdForm>()
+  const location = useLocation();
+  const shortAd = location.state?.shortAd;
+  console.log('One ad page ', shortAd);
+
+  
+  useEffect(() => {
+    try {
+      getFormByShortId(shortFormId).then((data: AdForm) => {
+        setAd(data);
+
+        console.log('adShortForms', ad);
+      });
+    } catch (error) {
+      console.error('Произошла ошибка при загрузке данных пользователя:', error);
+    }
+  }, [shortFormId]);
+
+  useEffect(() => {
+    console.log(ad)
+  }, [ad]);
+  
       return (
-      <>One ad page</>
-          
+        <>
+          <div>{ad?.description}</div>
+
+        </>
+     
+        
           
       )
     })
