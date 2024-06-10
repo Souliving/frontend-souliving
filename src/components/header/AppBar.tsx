@@ -1,13 +1,13 @@
 import { Bell, Heart, MessageSquare, PawPrint } from "lucide-react"
-import { Button } from "./ui/button"
-import { EnterDialog } from "./EnterDialog";
+import { Button } from "../ui/button"
+import { EnterDialog } from "../EnterDialog";
 import { useContext, useEffect } from "react";
 import { AuthContext, useStore } from "@/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { User } from "@/utils/dataStructure";
 import { emptyUser } from "@/store/UserStore";
 import { encryptedLocalStorage } from "@/utils/secureLocalStorage";
-
+import AuthAppBar from './components/AuthAppBar'
 
 function AppBar () {
   const navigate = useNavigate()
@@ -49,10 +49,11 @@ function AppBar () {
        </>
        :
        <>
-        <Button className="mr-[0.2%]" variant="ghost"><Heart /></Button>
+       <AuthAppBar/>
+       {/*  <Button className="mr-[0.2%]" variant="ghost"><Heart /></Button>
         <Button className="mr-[0.2%]" variant="ghost"> <Bell /></Button>
         <Button className="mr-[0.2%]" variant="ghost"><MessageSquare /></Button>
-        <Button className="mr-[0.5%]" onClick={logOut}>Выход</Button>
+        <Button className="mr-[0.5%]" onClick={logOut}>Выход</Button> */}
        </>
        
        }

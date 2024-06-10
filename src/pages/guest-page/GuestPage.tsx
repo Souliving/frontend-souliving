@@ -1,5 +1,5 @@
 import { AuthContext, useStore } from "@/AuthProvider";
-import AppBar from "@/components/AppBar"
+import AppBar from "@/components/header/AppBar"
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 

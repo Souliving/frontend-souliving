@@ -1,4 +1,5 @@
 import { useStore } from "@/AuthProvider"
+import AppBar from "@/components/header/AppBar"
 import { getFormByShortId, getFormByUserId } from "@/server/FormsApi"
 import { AdForm } from "@/utils/dataStructure"
 import { useEffect, useState } from "react"
@@ -23,19 +24,20 @@ const OneAdPage=(() => {
       getFormByShortId(shortFormId).then((data: AdForm) => {
         setAd(data);
 
-        console.log('adShortForms', ad);
+        console.log('full form', ad);
       });
     } catch (error) {
       console.error('Произошла ошибка при загрузке данных пользователя:', error);
     }
   }, [shortFormId]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(ad)
-  }, [ad]);
+  }, [ad]); */
   
       return (
         <>
+          <AppBar/>
           <div>{ad?.description}</div>
 
         </>

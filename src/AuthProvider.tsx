@@ -3,9 +3,10 @@ import UserStore from './store/UserStore';
 import GlobalStore from './store/GlobalStore';
 import { encryptedLocalStorage } from './utils/secureLocalStorage';
 
-export const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
+export const AuthContext = createContext<GlobalStore | undefined | null>(null);;
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const [userState, setUserState] = useState(() => {
     // Получение данных из localStorage
@@ -30,8 +31,8 @@ export const AuthProvider = ({ children }) => {
     } else {
       return new GlobalStore()
     }
-  }, []);
-  console.log(userState)
+  });
+  console.log('userState',userState)
 
   return (
     <AuthContext.Provider value={userState}>

@@ -5,7 +5,9 @@ import OneAdPage from '@/pages/one-ad-page/OneAdPage'
 import {
     AD_ROUTE,
     MAIN_ROUTE, 
-    REGISTRATION_ROUTE} from './constRoutes'
+    REGISTRATION_ROUTE,
+    USER_ACCOUNT_ROUTE} from './constRoutes'
+import UserAccountPage from '@/pages/user-account-page/components/user-account-page'
 
 
 
@@ -16,7 +18,12 @@ export const authRoutes =[
     {
         path: AD_ROUTE +'/:id',
         Component: OneAdPage
-    }
+    },
+    {
+        path: USER_ACCOUNT_ROUTE +'/:user_id',
+        Component: UserAccountPage
+    },
+    
 ]
 //массив доступных страниц неавторизованному пользователю
 export const publicRoutes=[

@@ -12,3 +12,8 @@ export const getAllSubways = async () => {
     const response = await axios.get(apiUrl+'/metro/ ')
     return response.data
 }
+
+export const getAllSubwaysByCity = async (city_id) => {
+    const response = await axios.get(apiUrl+'/metro/getAllMetroByCityId/'+city_id)
+    return response.data
+}

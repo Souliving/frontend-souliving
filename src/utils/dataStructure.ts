@@ -18,6 +18,8 @@ export interface AdForm{
 
 export interface AdShortForm {
     id: number,
+    name: string,
+    age: number,
     formId: number,
     userId: number,
     photoId: number,
@@ -25,18 +27,19 @@ export interface AdShortForm {
     city: City,
     district: District,
     metro: Subway,
-    onlineDate: Date,
+    onlineDateTime: Date,
     budget: number,
-    dateMove: Date
+    description: string,
+    dateMove: Date,
   }
 
   export interface Properties{
     id: number,
-    smoking: number,
-    alcohol: number,
-    petFriendly: number,
-    isClean: number,
-    homeOwnerId: number
+    smoking: boolean,
+    alcohol: boolean,
+    petFriendly: boolean,
+    isClean: boolean,
+    homeOwnerId: boolean
   }
 
   export interface Subway{

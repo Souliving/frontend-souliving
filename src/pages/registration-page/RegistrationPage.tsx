@@ -67,10 +67,10 @@ const RegistrationPage = () => {
                 values.phone).then((data)=>{
                   console.log('res data',data)
                   user.setIsAuth(true);
-                  user.setUser({ id: data.id, email: 'email', name: 'name'});
+                  user.setUser({ id: data.id, email: data.email, name: data.name});
                  /*  
                    */
-                  //useSecureLocalStorage('userData', data);
+                  useSecureLocalStorage('userData', data);
                   if(data){
                     navigate('/', { replace: true })
                   }
