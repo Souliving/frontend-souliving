@@ -1,0 +1,15 @@
+.container{
+    margin:3px 8px
+}
+
+.one-ad{
+    display: flex;
+}
+.one-ad__images{
+    max-height: 30%;
+    width: 30%;
+}
+.main-img{
+ /*    max-width: 30%; */
+   /*  max-height: 30% */
+}

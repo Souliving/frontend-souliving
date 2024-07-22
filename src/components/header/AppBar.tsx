@@ -1,10 +1,9 @@
 import { Bell, Heart, MessageSquare, PawPrint } from "lucide-react"
 import { Button } from "../ui/button"
 import { EnterDialog } from "../EnterDialog";
-import { useContext, useEffect } from "react";
-import { AuthContext, useStore } from "@/AuthProvider";
+import {  useEffect } from "react";
+import {  useStore } from "@/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { User } from "@/utils/dataStructure";
 import { emptyUser } from "@/store/UserStore";
 import { encryptedLocalStorage } from "@/utils/secureLocalStorage";
 import AuthAppBar from './components/AuthAppBar'

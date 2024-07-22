@@ -11,4 +11,5 @@ export const MAIN_ROUTE = '/'
 export const REGISTRATION_ROUTE = '/registration'
 export const AD_ROUTE = '/ad'
 export const USER_ACCOUNT_ROUTE='/account'
+export const FAVORITES_ROUTE = '/favorites'
 

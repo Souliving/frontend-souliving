@@ -2,7 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -38,6 +39,15 @@ const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
           {item.title}
         </Link>
       ))}
+      <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Мои анкеты</AccordionTrigger>
+        <AccordionContent>
+          Yes. It adheres to the WAI-ARIA design pattern.
+        </AccordionContent>
+      </AccordionItem>
+      
+    </Accordion>
     </nav>
   )
 }

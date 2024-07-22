@@ -17,11 +17,11 @@ function AuthAppBar () {
     encryptedLocalStorage.removeItem('userData');
   }
   const toFavorites = () =>{
-    console.log(user.id)
-    /* navigate(`/favorites/${use}`}); */
+    console.log(user)
+     navigate(`/favorites/${user.user.id}`); 
   }
   const toUserAccount = () =>{
-    console.log(user.user.id)
+    console.log('toUserAccount',user.user.id)
     navigate( `${USER_ACCOUNT_ROUTE}/${user.user.id}`);
   }
   

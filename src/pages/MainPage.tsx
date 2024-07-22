@@ -8,10 +8,13 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { encryptedLocalStorage } from "@/utils/secureLocalStorage";
 import { getAllCities, getAllSubways } from "@/server/CitySubwayAPI";
+import { FormStoreType } from "@/store/FormStore";
 
 
-
-const MainPage = observer(() => {
+interface FavoritesPageProps {
+  formStore?: FormStoreType; // Тип для prop formStore
+}
+const MainPage = observer(( {formStore}: FavoritesPageProps) => {
    let auth;
    const [cities, setCities] = useState<any>(undefined);
    const [subways, setSubways] = useState<any>(undefined);
@@ -19,43 +22,11 @@ const MainPage = observer(() => {
    
    console.log("main "+user)
 
-     /*  useEffect(()=>{
-        console.log(user.isAuth)
-        const fetchData = async () => {
-         
-              try {
-                await getAllCities().then(data => {
-                    setCities(data);
-                    console.log(cities);
-                  });
-                  
-                  await getAllSubways().then(data => {
-                    setSubways(data);
-                    console.log(subways);
-                  });
-                return [cities, subways]
-              } catch (error) {
-                console.error('Ошибка при загрузке данных:', error);
-              }
-            
-          };
-        if (user.isAuth && (!cities || !subways)) {  
-            
-            console.log('cs',cities, subways);
-            
-            fetchData();
-        }
-      }, [user.isAuth]) */
-
-     /*  useEffect(()=>{
-        console.log('User auth is', user.isAuth)
-      }, [cities]) */
-
     return (
         <>
          <AppBar/>
         
-         {!user.isAuth ? <GuestPage/>: <UserHomePage/>}
+         {!user.isAuth ? <GuestPage/>: <UserHomePage formStore = {formStore}/>}
         </>
         
     )

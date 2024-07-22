@@ -4,10 +4,14 @@ import MainPage from '@/pages/MainPage'
 import OneAdPage from '@/pages/one-ad-page/OneAdPage'
 import {
     AD_ROUTE,
+    FAVORITES_ROUTE,
     MAIN_ROUTE, 
     REGISTRATION_ROUTE,
     USER_ACCOUNT_ROUTE} from './constRoutes'
-import UserAccountPage from '@/pages/user-account-page/components/user-account-page'
+import AccountFormPage from '@/pages/user-account-page/account-form-page'
+import FAQPage from '@/pages/user-account-page/faq/faq-page'
+import { Component } from 'lucide-react'
+import FavoritesPage from '@/pages/favorites-page/FavoritesPage'
 
 
 
@@ -17,13 +21,27 @@ import UserAccountPage from '@/pages/user-account-page/components/user-account-p
 export const authRoutes =[
     {
         path: AD_ROUTE +'/:id',
-        Component: OneAdPage
+        Component: OneAdPage,
+        requiresLayout: false
     },
     {
         path: USER_ACCOUNT_ROUTE +'/:user_id',
-        Component: UserAccountPage
+        Component: AccountFormPage,
+        requiresLayout: true
     },
-    
+    {
+        path: USER_ACCOUNT_ROUTE +'/faq',
+        Component: FAQPage,
+        requiresLayout: true
+    },
+   
+]
+export const formStoreAuth = [
+    {
+        path: FAVORITES_ROUTE +'/:user_id',
+        Component: FavoritesPage,
+        requiresLayout: false
+    } 
 ]
 //массив доступных страниц неавторизованному пользователю
 export const publicRoutes=[

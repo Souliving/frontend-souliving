@@ -1,4 +1,4 @@
-import { getAllShortForms, getPhotoById } from "@/server/FormsApi";
+import { filterAllAds, getAllShortForms, getPhotoById } from "@/server/FormsApi";
 import { useEffect, useState } from "react";
 import { AdShortForm } from "@/utils/dataStructure";
 
@@ -29,19 +29,21 @@ import { cn } from "@/lib/utils";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
-import { getAllSubways, getAllSubwaysByCity } from "@/server/CitySubwayAPI";
+import { getAllSubwaysByCity } from "@/server/CitySubwayAPI";
+import { observer } from "mobx-react";
+import { FormStoreType } from "@/store/FormStore";
 
+interface FavoritesPageProps {
+  formStore?: FormStoreType; // Тип для prop formStore
+}
 
-
-const UserHomePage=(() => {
+const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
   const [adShortForms, setAdShortForms] = useState<AdShortForm[]>([]);
-  const [selectedCity, setSelectedCity] = useState(null);
+
   const [selectedStation, setSelectedStation] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-  const { user } = useStore();
-  const [usersPhotos, setUsersPhotos] = useState<any[]>([]);
-
+  
+  const [usersPhotos, setUsersPhotos] = useState<T[]>([]);
 
   useEffect(() => {
     // Загрузка данных пользователя при монтировании компонента
@@ -49,11 +51,9 @@ const UserHomePage=(() => {
       getAllShortForms().then((data: AdShortForm[]) => {
         setAdShortForms(data);
         console.log('adShortForms', data);
-        /* cities.map((city)=>{
-          console.log(city.label)
-        }) */
         const photoIds = data.map(form => form.photoId);
         getPhoto(photoIds);
+        console.log('formStore', formStore)
         
       });
     } catch (error) {
@@ -67,6 +67,8 @@ const UserHomePage=(() => {
     setUsersPhotos(photoData)
     console.log('usersPhotos', photoData)
   } 
+
+  
   const filterForm = useForm<z.infer<typeof filterAds>>({
     resolver: zodResolver(filterAds),
     defaultValues: {
@@ -89,6 +91,9 @@ const UserHomePage=(() => {
 
   const onFilterAds = (data: z.infer<typeof filterAds>) =>{
     console.log('forms', data)
+    filterAllAds(data).then(res=>{
+      console.log(res)
+    })
   }
   
   const filterSubwayByCity = (city:string) =>{
@@ -343,7 +348,7 @@ const UserHomePage=(() => {
         <Button type="submit">Найти</Button> 
         </form>
       </Form>
-       <AllAds adShortForms={adShortForms} usersPhotos={usersPhotos} />
+       <AllAds adShortForms={adShortForms} usersPhotos={usersPhotos} formStore = {formStore}/>
        
       </>
    

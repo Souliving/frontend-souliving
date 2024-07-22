@@ -5,16 +5,6 @@ export interface User {
 
 }
 
-export interface AdForm{
-  id: number,
-  userId: number,
-  shortFormId: number,
-  description: string,
-  homeType: HomeType,
-  socialMediaIds: [],
-  rating: number,
-  reviews: []
-}
 
 export interface AdShortForm {
     id: number,
@@ -31,6 +21,13 @@ export interface AdShortForm {
     budget: number,
     description: string,
     dateMove: Date,
+  }
+  export interface AdForm extends AdShortForm {
+    userId: number,
+    homeType: HomeType,
+    socialMediaIds: [],
+    rating: number,
+    reviews: []
   }
 
   export interface Properties{

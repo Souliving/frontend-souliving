@@ -20,6 +20,7 @@ export const login = async (email:string, password:string) => {
         throw error; // Переброс ошибки, чтобы обработать ее в вызывающем коде
     }
 }
+
 export const registration = async (email:string,  
                                   password:string,
                                   name: string,
@@ -54,6 +55,29 @@ export const registration = async (email:string,
  
   }
 
-export const getInfoUser = async(id:number)=>{
+/* export const getInfoUser = async(id:number)=>{
 
+} */
+export const postUserData = async(name: string, userId:number)=>{
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  };
+  try {
+    const response = await axios.post(apiUrl+'api/v1/users/fillUser/'+userId, {'name': name}, config);
+    return response.data;
+  } catch (error) {
+    // Обработка ошибки
+    console.error('Ошибка запроса:', error);
+    throw error; // Переброс ошибки, чтобы обработать ее в вызывающем коде
+  }
+}
+
+export const getPhotoByUId = async (user_id: number) =>{
+  const response = await axios.get(apiUrl + 'api/v1/image/getImageById/' + user_id, {
+    responseType: 'blob' 
+  }); 
+  const objectURL = URL.createObjectURL(response.data);
+  return objectURL 
 }
