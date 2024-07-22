@@ -6,38 +6,26 @@ import AdCard from "../user-home-page/components/AdCard";
 import AppBar from "@/components/header/AppBar";
 import { observer } from "mobx-react";
 import { FormStoreType } from "@/store/FormStore";
-interface FavoritesPageProps {
-    formStore: FormStoreType; // Тип для prop formStore
-  }
-const FavoritesPage = observer(( {formStore}: FavoritesPageProps ) => {
+
+const FavoritesPage =() => {
     const {user} = useStore();
     const [adFavForms, setAdFavForms] = useState<AdShortForm[]>([]);
     const [usersPhotos, setUsersPhotos] = useState<T[]>([]);
     const [favoritesId, setFavoritesId] = useState<number[]>([]);
-    useEffect(() => {
-        if (formStore.favoriteForms.length === 0 && !formStore.loadingFavoriteForms) {
-          formStore.loadFavoriteForms(user.user.id);
-        }
-        else{
-            const photoIds = formStore.favoriteForms.map(form => form.photoId);
-            setFavoritesId(formStore.favoriteForms.map(form => form.id));
-            getPhoto(photoIds);
-        }
-    }, [formStore, formStore.favoriteForms.length, user.user.id]);
     
-    /* useEffect(()=>{
+    useEffect(()=>{
         try{
             getFavoriteForms(user.user.id).then(data =>{
                 setAdFavForms(data);
                 console.log(data)
-                const photoIds = data.map(form => form.photoId);
+                const photoIds = data.map((form: { photoId: any; }) => form.photoId);
                 getPhoto(photoIds);
             })
         }
         catch{
             console.log('Error')
         }
-    }, []) */
+    })
     const getPhoto = async (photoIds: number[])=>{
         console.log('photoIds', photoIds)
         const photoData = await Promise.all(photoIds.map(id => getPhotoById(id)));
@@ -64,7 +52,7 @@ const FavoritesPage = observer(( {formStore}: FavoritesPageProps ) => {
         <AppBar/>
         <div className="space-y-6">
             <div style={{ display: 'flex', flexWrap: 'wrap' , justifyContent: 'space-around', padding: '1%'}}>
-                {formStore.favoriteForms.map((adFavForm:AdShortForm, i:number) => (
+                {adFavForms.map((adFavForm:AdShortForm, i:number) => (
                 <AdCard
                 key={adFavForm.id}
                 adShortForm={adFavForm}
@@ -79,5 +67,5 @@ const FavoritesPage = observer(( {formStore}: FavoritesPageProps ) => {
         </>
       
     )
-  })
+  }
 export default FavoritesPage

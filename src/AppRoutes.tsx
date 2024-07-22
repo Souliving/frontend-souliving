@@ -2,9 +2,8 @@ import { Routes, Route, Navigate, BrowserRouter as Router} from 'react-router-do
 import { MAIN_ROUTE } from './utils/constRoutes';
 import { useStore } from './AuthProvider'
 
-import { authRoutes, formStoreAuth, publicRoutes } from './utils/routes';
+import { authRoutes, publicRoutes } from './utils/routes';
 import UserAccountPage from './pages/user-account-page/UserAccountPage';
-import formStore from './store/FormStore';
 
 
 function AppRouter() {
@@ -27,21 +26,10 @@ function AppRouter() {
                 <Component />
               )}/>
             ))
-            && formStoreAuth.map(({ path, Component, })=>(
-              <Route key={path} path={path} element={<Component formStore={formStore} />} />
-            ))
             } 
         
             {publicRoutes.map(({ path, Component }) => (
-                <Route
-                key={path}
-                path={path}
-                element={path === MAIN_ROUTE && isAuth ? (
-                  <Component formStore={formStore} />
-                ) : (
-                  <Component />
-                )}
-              />
+                <Route key={path} path={path} element={<Component />} />
             ))}
        
         <Route path="*" element={<Navigate to={MAIN_ROUTE} />} />

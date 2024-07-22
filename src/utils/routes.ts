@@ -34,14 +34,12 @@ export const authRoutes =[
         Component: FAQPage,
         requiresLayout: true
     },
-   
-]
-export const formStoreAuth = [
     {
         path: FAVORITES_ROUTE +'/:user_id',
         Component: FavoritesPage,
         requiresLayout: false
-    } 
+    }
+    
 ]
 //массив доступных страниц неавторизованному пользователю
 export const publicRoutes=[

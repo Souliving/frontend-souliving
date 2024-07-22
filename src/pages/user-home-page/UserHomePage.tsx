@@ -5,22 +5,18 @@ import { AdShortForm } from "@/utils/dataStructure";
 import { 
   Form, 
   FormControl, 
-  FormDescription, 
   FormField,
   FormItem, 
   FormLabel, 
-  FormMessage } from "@/components/ui/form";
+   } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { useStore } from "@/AuthProvider";
-import { UsersPhotos } from "@/utils/devStructure";
-import { userProperties } from "@/utils/constData";
+
 import AllAds from "./components/AllAds";
 import { useForm } from "react-hook-form";
-import { ageAds, filterAds, preferencesAds } from "./filterAds";
+import { filterAds, preferencesAds, transformPreferences } from "./filterAds";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { cities } from "@/utils/constData";
@@ -30,14 +26,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 import { getAllSubwaysByCity } from "@/server/CitySubwayAPI";
-import { observer } from "mobx-react";
-import { FormStoreType } from "@/store/FormStore";
 
-interface FavoritesPageProps {
-  formStore?: FormStoreType; // Тип для prop formStore
-}
 
-const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
+
+
+const UserHomePage = ()=> {
   const [adShortForms, setAdShortForms] = useState<AdShortForm[]>([]);
 
   const [selectedStation, setSelectedStation] = useState<any>(null);
@@ -53,7 +46,6 @@ const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
         console.log('adShortForms', data);
         const photoIds = data.map(form => form.photoId);
         getPhoto(photoIds);
-        console.log('formStore', formStore)
         
       });
     } catch (error) {
@@ -90,9 +82,12 @@ const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
   })
 
   const onFilterAds = (data: z.infer<typeof filterAds>) =>{
-    console.log('forms', data)
-    filterAllAds(data).then(res=>{
-      console.log(res)
+    console.log('forms', data);
+   const dataFoServer =  transformPreferences(data);
+    filterAllAds(dataFoServer).then(res=>{
+      setAdShortForms(res);
+      const photoIds = res.map((form: { photoId: any; }) => form.photoId);
+      getPhoto(photoIds);
     })
   }
   
@@ -104,9 +99,6 @@ const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
       setSelectedStation(data);
       console.log(selectedStation)
     })
-  }
-  const check = (f: z.infer<typeof filterAds>) =>{
-    console.log(f)
   }
 
     return (
@@ -348,14 +340,14 @@ const UserHomePage = observer(( {formStore}: FavoritesPageProps ) => {
         <Button type="submit">Найти</Button> 
         </form>
       </Form>
-       <AllAds adShortForms={adShortForms} usersPhotos={usersPhotos} formStore = {formStore}/>
+       <AllAds adShortForms={adShortForms} usersPhotos={usersPhotos} />
        
       </>
    
         
         
     )
-  })
+  }
   
   export default UserHomePage
   

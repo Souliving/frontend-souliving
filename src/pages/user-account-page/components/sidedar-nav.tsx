@@ -16,6 +16,10 @@ const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
     const location = useLocation();
     const pathname = location.pathname;
 
+    const createNewForm = () =>{
+      
+    }
+
   return (
     <nav
       className={cn(
@@ -43,7 +47,7 @@ const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
       <AccordionItem value="item-1">
         <AccordionTrigger>Мои анкеты</AccordionTrigger>
         <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
+         <Button onClick={createNewForm()}>Создать анкету</Button>
         </AccordionContent>
       </AccordionItem>
       

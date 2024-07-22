@@ -11,13 +11,7 @@ import { getAllCities, getAllSubways } from "@/server/CitySubwayAPI";
 import { FormStoreType } from "@/store/FormStore";
 
 
-interface FavoritesPageProps {
-  formStore?: FormStoreType; // Тип для prop formStore
-}
-const MainPage = observer(( {formStore}: FavoritesPageProps) => {
-   let auth;
-   const [cities, setCities] = useState<any>(undefined);
-   const [subways, setSubways] = useState<any>(undefined);
+const MainPage = observer(() => {
    const { user }= useStore();
    
    console.log("main "+user)
@@ -26,7 +20,7 @@ const MainPage = observer(( {formStore}: FavoritesPageProps) => {
         <>
          <AppBar/>
         
-         {!user.isAuth ? <GuestPage/>: <UserHomePage formStore = {formStore}/>}
+         {!user.isAuth ? <GuestPage/>: <UserHomePage/>}
         </>
         
     )

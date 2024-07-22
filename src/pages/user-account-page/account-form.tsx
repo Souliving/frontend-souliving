@@ -21,6 +21,7 @@ import { useStore } from "@/AuthProvider";
 import { postUserData } from "@/server/UserApi";
 import { updateSecureLocalStorage, useSecureLocalStorage } from "@/utils/secureLocalStorage";
 import { useEffect, useState } from "react";
+import { getPhotoById } from "@/server/FormsApi";
 
 
 const profileFormSchema = z.object({
@@ -46,7 +47,8 @@ export function AccountForm() {
 
     const defaultUserName = user.user.name || '';
     const defaultUserId = user.user.id || 5;
-    let [userName, setUserName] = useState(user.user.name)
+    let [userName, setUserName] = useState(user.user.name);
+    const [userPhoto, setUserPhoto] = useState<string>('');
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileFormSchema),
         defaultValues: {
@@ -65,7 +67,15 @@ export function AccountForm() {
     }) */
     useEffect(() => {
         console.log('User updated:', user.user);
+        getPhoto(user.user.id)
     }, [user.user]);
+
+    const getPhoto = async (photoIds: number)=>{
+      console.log('photoIds', photoIds)
+      const photoData = await getPhotoById(photoIds);
+      setUserPhoto(photoData)
+      console.log('usersPhotos', photoData)
+    } 
 
     function onSubmit(data: ProfileFormValues) {
         console.log('update user',data, user.user);
@@ -89,7 +99,7 @@ export function AccountForm() {
     <>
     <div className="flex items-center">
         <Avatar className="w-1/4 h-1/4">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src={userPhoto} alt="User Photo" />
             <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <h2 className="text-2xl ml-4">{userName}</h2>
