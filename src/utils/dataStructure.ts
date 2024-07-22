@@ -16,7 +16,7 @@ export interface AdShortForm {
     properties: Properties,
     city: City,
     district: District,
-    metro: Subway,
+    metro: Subway[],
     onlineDateTime: Date,
     budget: number,
     description: string,

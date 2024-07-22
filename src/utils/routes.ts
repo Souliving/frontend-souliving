@@ -10,12 +10,8 @@ import {
     USER_ACCOUNT_ROUTE} from './constRoutes'
 import AccountFormPage from '@/pages/user-account-page/account-form-page'
 import FAQPage from '@/pages/user-account-page/faq/faq-page'
-import { Component } from 'lucide-react'
 import FavoritesPage from '@/pages/favorites-page/FavoritesPage'
-
-
-
-
+import CreateNewFormPage from '@/pages/user-account-page/create-new-form/create-new-form-page'
 
 //массив доступных страниц авторизованному пользователю
 export const authRoutes =[
@@ -30,14 +26,19 @@ export const authRoutes =[
         requiresLayout: true
     },
     {
+        path: FAVORITES_ROUTE +'/:user_id',
+        Component: FavoritesPage,
+        requiresLayout: false
+    },
+    {
         path: USER_ACCOUNT_ROUTE +'/faq',
         Component: FAQPage,
         requiresLayout: true
     },
     {
-        path: FAVORITES_ROUTE +'/:user_id',
-        Component: FavoritesPage,
-        requiresLayout: false
+        path: USER_ACCOUNT_ROUTE +'/create_new_form',
+        Component: CreateNewFormPage,
+        requiresLayout: true
     }
     
 ]

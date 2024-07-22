@@ -1,14 +1,11 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useFieldArray, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
-
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,13 +13,11 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Link } from "react-router-dom";
 import { useStore } from "@/AuthProvider";
 import { postUserData } from "@/server/UserApi";
-import { updateSecureLocalStorage, useSecureLocalStorage } from "@/utils/secureLocalStorage";
+import { updateSecureLocalStorage } from "@/utils/secureLocalStorage";
 import { useEffect, useState } from "react";
 import { getPhotoById } from "@/server/FormsApi";
-
 
 const profileFormSchema = z.object({
   name: z
@@ -46,8 +41,7 @@ export function AccountForm() {
     const {user} = useStore();
 
     const defaultUserName = user.user.name || '';
-    const defaultUserId = user.user.id || 5;
-    let [userName, setUserName] = useState(user.user.name);
+    const [userName, setUserName] = useState(user.user.name);
     const [userPhoto, setUserPhoto] = useState<string>('');
     const form = useForm<ProfileFormValues>({
         resolver: zodResolver(profileFormSchema),

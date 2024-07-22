@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -9,26 +8,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import  { useContext, useState } from 'react'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import  { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Input } from "@/components/ui/input"
-import { AuthContext, useStore } from "@/AuthProvider"
+import { useStore } from "@/AuthProvider"
 import { observer } from "mobx-react"
 import { login } from "@/server/UserApi"
 import { useSecureLocalStorage } from "@/utils/secureLocalStorage"
 
+
 export const EnterDialog = observer(()=> {
 
-  const { user }= useStore();
+  const { user }=  useStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate()
-  const location = useLocation()
-
-  const [invalid, setInvalid] = useState(false)
-  const fromPage = '/'
-  //if(user.isAuth){return <Navigate to="/home" replace={true}/>}
+ 
   const handleSubmit =  async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {

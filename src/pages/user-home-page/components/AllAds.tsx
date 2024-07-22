@@ -1,21 +1,9 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-  } from "@/components/ui/card"
-  import { Button } from "@/components/ui/button";
-  import { useNavigate } from "react-router-dom";
-  import { useStore } from "@/AuthProvider";
-  import {  Heart } from "lucide-react"
-  import { userProperties } from "@/utils/constData";
+import { useStore } from "@/AuthProvider";
 import { AdShortForm } from "@/utils/dataStructure";
 import { addFavoriteForm, getFavoriteForms } from "@/server/FormsApi";
 import AdCard from "./AdCard";
 import { useEffect, useState } from "react";
-import { FormStoreType } from "@/store/FormStore";
-import { observer } from "mobx-react";
+
 
 interface AllAdsProps {
   adShortForms: AdShortForm[];

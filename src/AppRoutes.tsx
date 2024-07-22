@@ -6,6 +6,7 @@ import { authRoutes, publicRoutes } from './utils/routes';
 import UserAccountPage from './pages/user-account-page/UserAccountPage';
 
 
+
 function AppRouter() {
     const { user } = useStore(); // показывает авторизован пользователь или нет
     //user.setIsAuth(true)

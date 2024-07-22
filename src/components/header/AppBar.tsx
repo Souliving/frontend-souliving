@@ -1,11 +1,10 @@
-import { Bell, Heart, MessageSquare, PawPrint } from "lucide-react"
+import {PawPrint } from "lucide-react"
 import { Button } from "../ui/button"
 import { EnterDialog } from "../EnterDialog";
 import {  useEffect } from "react";
 import {  useStore } from "@/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import { emptyUser } from "@/store/UserStore";
-import { encryptedLocalStorage } from "@/utils/secureLocalStorage";
+
 import AuthAppBar from './components/AuthAppBar'
 
 function AppBar () {
@@ -27,15 +26,11 @@ function AppBar () {
     navigate('/registration', { replace: true });
   }
 
-  const logOut =()=>{
-    user.setIsAuth(false);
-    user.setUser(emptyUser);
-    encryptedLocalStorage.removeItem('userData');
-  }
+ 
   
 
     return (
-      <div className='container app-bar ' >
+      <div className='container-bar app-bar '>
        <Button 
           className="ml-0	mr-[70%]" 
           onClick={navigateToMain}>
@@ -49,14 +44,10 @@ function AppBar () {
        :
        <>
        <AuthAppBar/>
-       {/*  <Button className="mr-[0.2%]" variant="ghost"><Heart /></Button>
-        <Button className="mr-[0.2%]" variant="ghost"> <Bell /></Button>
-        <Button className="mr-[0.2%]" variant="ghost"><MessageSquare /></Button>
-        <Button className="mr-[0.5%]" onClick={logOut}>Выход</Button> */}
+      
        </>
        
        }
-       {/* <Button  className="	mr-[0.5%]" onClick={enter}>Вход</Button> */}
        
       </div>
     )

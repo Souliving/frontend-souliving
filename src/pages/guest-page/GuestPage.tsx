@@ -1,16 +1,9 @@
-import { AuthContext, useStore } from "@/AuthProvider";
-import AppBar from "@/components/header/AppBar"
-import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { useStore } from "@/AuthProvider";
+
 
 const GuestPage = () => {
     const { user }= useStore();
     console.log('GuestPage')
-   /*  if (user.isAuth) {
-        console.log('User is auth')
-        return <Navigate to="/home" replace={true}/>
-    } */
-
     return (
         <>
         <div>{user.isAuth}</div>

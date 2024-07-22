@@ -1,4 +1,4 @@
-import { start } from "repl"
+
 import { z } from "zod"
  
 export const filterAds=  z.object({ 
@@ -82,7 +82,7 @@ export const transformPreferences = (input: z.infer<typeof filterAds>): Preferen
       endAge: age.end || 0,
     },
     cityId: [parseInt(place.city, 10) || 0],
-    metroIds: place.subway.map((subway) => subway.id || 0),
+    metroIds: place.subway.map((subway) => subway || 0),
     smoking,
     alcohol,
     petFriendly,

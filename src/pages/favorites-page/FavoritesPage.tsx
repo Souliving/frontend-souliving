@@ -4,14 +4,13 @@ import { AdShortForm } from "@/utils/dataStructure";
 import { useEffect, useState } from "react"
 import AdCard from "../user-home-page/components/AdCard";
 import AppBar from "@/components/header/AppBar";
-import { observer } from "mobx-react";
-import { FormStoreType } from "@/store/FormStore";
+
 
 const FavoritesPage =() => {
     const {user} = useStore();
     const [adFavForms, setAdFavForms] = useState<AdShortForm[]>([]);
-    const [usersPhotos, setUsersPhotos] = useState<T[]>([]);
-    const [favoritesId, setFavoritesId] = useState<number[]>([]);
+    const [usersPhotos, setUsersPhotos] = useState<string[]>([]);
+    const [favoritesId] = useState<number[]>([]);
     
     useEffect(()=>{
         try{
@@ -25,7 +24,7 @@ const FavoritesPage =() => {
         catch{
             console.log('Error')
         }
-    })
+    },[])
     const getPhoto = async (photoIds: number[])=>{
         console.log('photoIds', photoIds)
         const photoData = await Promise.all(photoIds.map(id => getPhotoById(id)));

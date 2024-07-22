@@ -9,9 +9,7 @@ import {userRegistrationShema_1, userRegistrationShema_2} from "./UserRegistrati
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { registration } from "@/server/UserApi";
-
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { strict } from "assert";
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";

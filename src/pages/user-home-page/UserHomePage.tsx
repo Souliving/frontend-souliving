@@ -1,6 +1,6 @@
 import { filterAllAds, getAllShortForms, getPhotoById } from "@/server/FormsApi";
 import { useEffect, useState } from "react";
-import { AdShortForm } from "@/utils/dataStructure";
+import { AdShortForm, Subway } from "@/utils/dataStructure";
 
 import { 
   Form, 
@@ -33,10 +33,10 @@ import { getAllSubwaysByCity } from "@/server/CitySubwayAPI";
 const UserHomePage = ()=> {
   const [adShortForms, setAdShortForms] = useState<AdShortForm[]>([]);
 
-  const [selectedStation, setSelectedStation] = useState<any>(null);
+  const [selectedStation, setSelectedStation] = useState<Subway[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   
-  const [usersPhotos, setUsersPhotos] = useState<T[]>([]);
+  const [usersPhotos, setUsersPhotos] = useState<string[]>([]);
 
   useEffect(() => {
     // Загрузка данных пользователя при монтировании компонента
@@ -110,7 +110,7 @@ const UserHomePage = ()=> {
                       rules={{}} 
                       control={filterForm.control}
                       name="preferences"
-                      render={({ field }) => {
+                      render={() => {
                         return (
                         <DropdownMenu >
                           <DropdownMenuTrigger asChild>

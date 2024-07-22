@@ -1,6 +1,6 @@
 import { useStore } from "@/AuthProvider"
 import AppBar from "@/components/header/AppBar"
-import { getFormById, getFormByUserId } from "@/server/FormsApi"
+import { getFormById } from "@/server/FormsApi"
 import { AdForm } from "@/utils/dataStructure"
 import { useEffect, useState } from "react"
 import { useLocation, useParams } from "react-router-dom"
@@ -44,7 +44,7 @@ const OneAdPage=(() => {
       return (
         <>
           <AppBar/>
-          <div className="container one-ad">
+          <div className="container-one-ad one-ad">
             <div className = "one-ad__images">
             <img className='main-img' 
                     src={userPhoto} 

@@ -1,14 +1,14 @@
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, createContext, useContext, useEffect, useState } from 'react'
-import UserStore from './store/UserStore';
+import {  ReactNode, createContext, useContext, useState } from 'react'
+
 import GlobalStore from './store/GlobalStore';
 import { encryptedLocalStorage } from './utils/secureLocalStorage';
 
 
-export const AuthContext = createContext<GlobalStore | undefined | null>(null);;
+export const AuthContext = createContext<GlobalStore | null>(null);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
-  const [userState, setUserState] = useState(() => {
+  const [userState] = useState(() => {
     // Получение данных из localStorage
     const storedUserData = encryptedLocalStorage.getItem('userData');
     console.log("auth")

@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 import { cn } from "@/lib/utils"
@@ -15,9 +15,9 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
     const location = useLocation();
     const pathname = location.pathname;
-
+    const navigate = useNavigate();
     const createNewForm = () =>{
-      
+      navigate('/account/create_new_form');
     }
 
   return (
@@ -47,7 +47,7 @@ const SidebarNav = ({ className, items, ...props }: SidebarNavProps) => {
       <AccordionItem value="item-1">
         <AccordionTrigger>Мои анкеты</AccordionTrigger>
         <AccordionContent>
-         <Button onClick={createNewForm()}>Создать анкету</Button>
+         <Button onClick={createNewForm}>Создать анкету</Button>
         </AccordionContent>
       </AccordionItem>
       
