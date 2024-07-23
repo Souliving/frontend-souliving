@@ -1,4 +1,5 @@
 
+import { City } from "@/utils/dataStructure";
 import { z } from "zod"
  
 export const filterAds=  z.object({ 
@@ -12,7 +13,7 @@ export const filterAds=  z.object({
       end: z.union([z.number(), z.undefined()]),
     }),
     place: z.object({
-        city: z.union([z.string(), z.undefined()]),
+        city: z.union([z.custom<City>(), z.undefined()]),
         subway:  z.array(z.number(), z.undefined()),
       })
 
@@ -65,23 +66,23 @@ interface PreferencesOutput {
 
 export const transformPreferences = (input: z.infer<typeof filterAds>): PreferencesOutput => {
   const { preferences, age, price, place } = input;
-
+  
   // Устанавливаем значения по умолчанию, если preferences пустой
-  const smoking = preferences.length === 0 ? true : preferences.includes('smoking');
-  const alcohol = preferences.length === 0 ? true : preferences.includes('alcohol');
-  const petFriendly = preferences.length === 0 ? true : preferences.includes('petFriendly');
-  const isClean = preferences.length === 0 ? true : preferences.includes('isClean');
+  const smoking = preferences.includes('smoking') ? preferences.includes('smoking') : null;
+  const alcohol = preferences.includes('alcohol') ? preferences.includes('alcohol') : null;
+  const petFriendly = preferences.includes('petFriendly') ? preferences.includes('petFriendly') : null;
+  const isClean = preferences.includes('isClean') ? preferences.includes('isClean') : null;
 
   return {
     price: {
-      startPrice: price.start || 0,
-      endPrice: price.end || 0,
+      startPrice: price.start || null,
+      endPrice: price.end || null,
     },
     age: {
-      startAge: age.start || 0,
-      endAge: age.end || 0,
+      startAge: age.start || null,
+      endAge: age.end || null,
     },
-    cityId: [parseInt(place.city, 10) || 0],
+    cityId: place.city.id != null ? [place.city.id]: [],
     metroIds: place.subway.map((subway) => subway || 0),
     smoking,
     alcohol,

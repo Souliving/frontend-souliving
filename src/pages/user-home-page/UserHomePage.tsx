@@ -1,6 +1,6 @@
 import { filterAllAds, getAllShortForms, getPhotoById } from "@/server/FormsApi";
 import { useEffect, useState } from "react";
-import { AdShortForm, Subway } from "@/utils/dataStructure";
+import { AdShortForm, Subway, City } from "@/utils/dataStructure";
 
 import { 
   Form, 
@@ -19,13 +19,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { cities } from "@/utils/constData";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
-import { getAllSubwaysByCity } from "@/server/CitySubwayAPI";
+import { getAllCities, getAllSubwaysByCity } from "@/server/CitySubwayAPI";
 
 
 
@@ -34,6 +33,7 @@ const UserHomePage = ()=> {
   const [adShortForms, setAdShortForms] = useState<AdShortForm[]>([]);
 
   const [selectedStation, setSelectedStation] = useState<Subway[]>([]);
+  const [apiCities, setApiCities] = useState<City[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   
   const [usersPhotos, setUsersPhotos] = useState<string[]>([]);
@@ -46,10 +46,16 @@ const UserHomePage = ()=> {
         console.log('adShortForms', data);
         const photoIds = data.map(form => form.photoId);
         getPhoto(photoIds);
-        
       });
     } catch (error) {
       console.error('Произошла ошибка при загрузке данных пользователя:', error);
+    }
+    try {
+       getAllCities().then((data: City[]) => {
+        setApiCities(data);
+       })
+    } catch (error) {
+      console.error('Произошла ошибка при загрузке городов', error)
     }
   }, []);
 
@@ -74,7 +80,7 @@ const UserHomePage = ()=> {
         end: undefined
       },
       place:{
-        city: '',
+        city: [],
         subway: [],
       }
     },
@@ -91,8 +97,8 @@ const UserHomePage = ()=> {
     })
   }
   
-  const filterSubwayByCity = (city:string) =>{
-    console.log(city);
+  const filterSubwayByCity = (city:number) =>{
+    console.log('city',city);
     
     getAllSubwaysByCity(city).then((data) =>{
       setIsOpen(true);
@@ -245,11 +251,10 @@ const UserHomePage = ()=> {
                                     !field.value && "text-muted-foreground"
                                   )}
                                 >
-
-                                  {field.value
-                                    ? cities.find(
-                                        (city) => city.label === field.value
-                                      )?.label
+                                  {field.value.name
+                                    ? apiCities.find(
+                                        (city) => city.name === field.value.name
+                                      )?.name
                                     : "Выберите город"}
                                 </Button>
                               </FormControl>
@@ -260,24 +265,24 @@ const UserHomePage = ()=> {
                                 <CommandEmpty>Таких городов нет</CommandEmpty>
                                 <CommandGroup>
                                 <CommandList>
-                                  {cities.map((city) => (
+                                  {apiCities.map((city) => (
                                     <CommandItem
-                                      value={city.id}
+                                      value={city.name}
                                       key={city.id}
                                       onSelect={() => {
-                                        filterForm.setValue("place.city", city.label)
+                                        filterForm.setValue("place.city", city)
                                         filterSubwayByCity(city.id)
                                       }}
                                     >
                                       <Check
                                         className={cn(
                                           "mr-2 h-4 w-4",
-                                          city.label == field.value
+                                          field.value.name === city.name
                                             ? "opacity-100"
                                             : "opacity-0"
                                         )}
                                       />
-                                      {city.label}
+                                      {city.name}
                                     </CommandItem>
                                   ))}
                                   </CommandList>
@@ -289,7 +294,7 @@ const UserHomePage = ()=> {
                            
                             {isOpen && (
                               <>
-                                <div>Станции метро в {filterForm.getValues('place.city')}</div>
+                                <div>Станции метро в {filterForm.getValues('place.city').name}</div>
                                   {selectedStation && selectedStation.map((station:any) =>{
                                    return <FormField
                                         rules={{}} 
